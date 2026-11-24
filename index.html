@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎉</title>
+    <!-- Tailwind CSS untuk tata letak responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts untuk tipografi Retro Biru Sky -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =================================================================
+           VARIABEL TEMA DESAIN: RETRO BIRU SKY
+           ================================================================= */
+        :root, [data-theme="retro"] {
+            --bg-gradient: radial-gradient(circle at top left, #F0F9FF 0%, #BAE6FD 48%, #7DD3FC 100%);
+            --card-bg: rgba(248, 252, 255, 0.94);
+            --card-border: #0C4A6E;
+            --card-shadow: 8px 8px 0px #0C4A6E;
+            --text-primary: #0F172A;
+            --text-secondary: #334155;
+            --accent-primary: #0284C7;
+            --accent-secondary: #38BDF8;
+            --accent-highlight: #0369A1;
+            --badge-bg: rgba(56, 189, 248, 0.22);
+            --font-display: 'Caveat', cursive;
+            --font-serif: 'Space Mono', monospace;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --polaroid-bg: #FFFFFF;
+            --polaroid-border: #0C4A6E;
+            --confetti-1: #0284C7;
+            --confetti-2: #38BDF8;
+            --confetti-3: #F59E0B;
+            --confetti-4: #0C4A6E;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-image:
+                radial-gradient(#0284C7 1px, transparent 1px),
+                var(--bg-gradient);
+            background-size: 26px 26px, 100% 100%;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.4s ease;
+        }
+
+        .theme-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 2.5px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+        }
+
+        .font-theme-display { font-family: var(--font-display); }
+        .font-theme-serif { font-family: var(--font-serif); }
+        .text-theme-primary { color: var(--text-primary); }
+        .text-theme-secondary { color: var(--text-secondary); }
+        .text-theme-accent { color: var(--accent-primary); }
+        .text-theme-highlight { color: var(--accent-highlight); }
+        .bg-theme-accent { background-color: var(--accent-primary); }
+        .bg-theme-badge { background-color: var(--badge-bg); }
+        .border-theme-accent { border-color: var(--accent-primary); }
+
+        /* Animasi Mengambang Kotak Kado */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2.5deg); }
+        }
+        .animate-float {
+            animation: float 3.4s ease-in-out infinite;
+        }
+
+        /* Animasi Transisi Masuk Slide */
+        @keyframes slideFadeIn {
+            0% { opacity: 0; transform: translateY(18px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .slide-active {
+            animation: slideFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Animasi Api Lilin */
+        @keyframes flicker {
+            0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+            25% { transform: scale(1.08, 0.94) rotate(2deg); opacity: 0.92; }
+            50% { transform: scale(0.95, 1.06) rotate(-1deg); opacity: 1; }
+            75% { transform: scale(1.04, 0.96) rotate(3deg); opacity: 0.95; }
+        }
+        .candle-flame {
+            transform-origin: bottom center;
+            animation: flicker 1.15s infinite alternate ease-in-out;
+            box-shadow: 0 0 18px 5px rgba(255, 183, 3, 0.65), 0 0 34px 10px rgba(251, 133, 0, 0.35);
+        }
+
+        /* Animasi Asap Lilin */
+        @keyframes smokeRise {
+            0% { opacity: 0.85; transform: translateY(0) scale(0.6) translateX(0); }
+            50% { opacity: 0.5; transform: translateY(-24px) scale(1.2) translateX(6px); }
+            100% { opacity: 0; transform: translateY(-54px) scale(1.8) translateX(-6px); }
+        }
+        .smoke-puff {
+            animation: smokeRise 2.2s ease-out forwards;
+        }
+
+        /* Kartu Interaktif di Slide 5 */
+        .wish-card {
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+        }
+        .wish-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Bingkai Polaroid */
+        .polaroid-frame {
+            background-color: var(--polaroid-bg);
+            border: 2px solid var(--polaroid-border);
+            box-shadow: 4px 4px 0px #0C4A6E;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .polaroid-frame:hover {
+            transform: translateY(-4px) rotate(0deg) !important;
+        }
+
+        /* Scrollbar halus */
+        .custom-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(150, 150, 150, 0.35);
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body data-theme="retro" class="antialiased relative flex flex-col justify-between">
+
+    <!-- Canvas Konfeti Fullscreen -->
+    <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50 w-full h-full"></canvas>
+
+    <!-- ===================================================================== -->
+    <!-- BAR ATAS: KONTROL MUSIK & EDIT (KANAN)                                -->
+    <!-- ===================================================================== -->
+    <header class="fixed top-0 left-0 right-0 z-40 px-3 sm:px-6 py-3 flex flex-wrap items-center justify-end gap-2 pointer-events-none">
+        <div class="pointer-events-auto flex items-center gap-1.5 sm:gap-2 ml-auto">
+            <!-- Kontrol Pemutar Musik -->
+            <button id="music-toggle-btn" onclick="toggleBirthdayMusic()"
+                class="flex items-center gap-1.5 px-3 py-2 rounded-full bg-sky-50/95 hover:bg-white text-sky-950 shadow-[3px_3px_0px_#0C4A6E] border-2 border-sky-900 transition-all text-xs font-bold active:scale-95"
+                title="Play or Pause Song">
+                <span id="music-icon" class="text-sm">🎵</span>
+                <span id="music-label" class="hidden sm:inline max-w-[140px] truncate">Play Song</span>
+            </button>
+
+            <button onclick="openCustomizeModal()"
+                class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-sky-600 hover:bg-sky-500 text-white shadow-[3px_3px_0px_#0C4A6E] border-2 border-sky-900 transition-all text-xs font-bold active:scale-95"
+                title="Customize Text, Song, Link, and Photos">
+                <span>✏️</span>
+                <span>Customize</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- AREA UTAMA 7 SLIDE INTERAKTIF                                         -->
+    <!-- ===================================================================== -->
+    <main id="slides-wrapper" class="flex-1 flex items-center justify-center px-4 pt-20 pb-24 min-h-screen">
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 1: KOTAK KADO PEMBUKA                                       -->
+        <!-- ================================================================= -->
+        <section id="slide-0" class="slide-panel w-full max-w-lg text-center slide-active">
+            <div class="theme-card rounded-3xl p-8 sm:p-11 flex flex-col items-center relative overflow-hidden">
+                <span class="px-3.5 py-1 rounded-full bg-theme-badge text-theme-accent text-xs font-bold uppercase tracking-[0.2em] mb-3">
+                    Slide 1 • Special Surprise
+                </span>
+                <h1 class="font-theme-serif text-2xl sm:text-3xl font-bold text-theme-primary mb-2">
+                    A Warm Message For You ✨
+                </h1>
+                <p id="s1-recipient-preview" class="text-sm font-semibold text-theme-accent mb-5">
+                    To: My Lovely Girl
+                </p>
+
+                <!-- Kotak Kado Interaktif -->
+                <div onclick="openGiftBox()" role="button" tabindex="0" aria-label="Open Gift Box"
+                    class="cursor-pointer group my-3 relative animate-float select-none">
+                    <div class="w-36 h-36 sm:w-44 sm:h-44 mx-auto relative flex items-center justify-center">
+                        <!-- Pita Atas -->
+                        <div class="absolute -top-2 flex items-center justify-center z-20 transition-transform duration-500 group-hover:-translate-y-3 group-hover:rotate-6">
+                            <div class="w-10 h-10 border-4 border-amber-400 rounded-full -mr-2 transform -rotate-12 bg-amber-100/85"></div>
+                            <div class="w-10 h-10 border-4 border-amber-400 rounded-full -ml-2 transform rotate-12 bg-amber-100/85"></div>
+                        </div>
+                        <!-- Tutup Kado -->
+                        <div class="absolute top-6 w-36 sm:w-40 h-9 bg-gradient-to-r from-sky-600 to-cyan-500 border-2 border-sky-950 rounded-xl shadow-md z-10 flex justify-center transition-transform duration-500 group-hover:-translate-y-3 group-hover:-rotate-3">
+                            <div class="w-6 h-full bg-amber-300 border-x-2 border-sky-950"></div>
+                        </div>
+                        <!-- Badan Kado -->
+                        <div class="absolute top-14 w-32 sm:w-36 h-24 sm:h-28 bg-gradient-to-b from-sky-500 to-sky-700 border-2 border-sky-950 rounded-b-2xl shadow-xl flex justify-center overflow-hidden">
+                            <div class="w-6 h-full bg-amber-300 border-x-2 border-sky-950 shadow-inner"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-sm sm:text-base text-theme-secondary mb-7 leading-relaxed max-w-sm">
+                    Tap the gift box above or press the button below to unwrap 7 pages of birthday surprises!
+                </p>
+
+                <button onclick="openGiftBox()"
+                    class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-theme-accent text-white font-bold text-base shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                    <span>🎁</span>
+                    <span>Open Gift & Start</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 2: UCAPAN UTAMA & SURAT SPESIAL                             -->
+        <!-- ================================================================= -->
+        <section id="slide-1" class="slide-panel hidden w-full max-w-2xl text-center">
+            <div class="theme-card rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-theme-badge text-theme-accent text-xs font-bold uppercase tracking-[0.2em] mb-3">
+                    Slide 2 • Special Letter
+                </span>
+
+                <h1 class="font-theme-display text-5xl sm:text-6xl md:text-7xl text-theme-accent my-1 leading-tight">
+                    Happy Birthday
+                </h1>
+
+                <h2 id="display-recipient" class="font-theme-serif text-2xl sm:text-3xl md:text-4xl font-bold text-theme-primary mt-1">
+                    My Dearest Friend ✨
+                </h2>
+
+                <p id="display-subtitle" class="text-xs sm:text-sm font-semibold uppercase tracking-widest text-theme-highlight mt-2 mb-6">
+                    Celebrating Another Year of Joy & Wonder
+                </p>
+
+                <!-- Isi Surat Panjang -->
+                <div class="max-w-xl mx-auto text-left sm:text-center bg-black/[0.03] rounded-2xl p-5 sm:p-7 border border-black/5 max-h-[45vh] overflow-y-auto custom-scroll">
+                    <p id="display-message" class="text-theme-primary text-sm sm:text-base md:text-lg leading-relaxed whitespace-pre-line">
+                        Today is an extraordinarily special day, because the world was blessed with someone as wonderful as you.
+
+                        May this new chapter of your life be filled with endless happiness, abundant health, and peace of mind. Thank you for being such a precious part of this journey, for always bringing laughter, and for inspiring everyone around you.
+
+                        Keep dreaming big, step forward with confidence, and never forget how deeply cherished you are
+
+                        I will always be your biggest supporter and will be there for you anytime. You can lean on me every time you feel tired. 
+                        
+                        I will always be your safe space when you feel like the world is against and weighs you down, I will always stay even if you feel like everyone is leaving you. 
+                        
+                        Whatever happens just remember that im always here and i will always be here, cause no matter how cruel the world is, you'll always have me, we'll always find a way to conquer the challenges that life throws.
+
+
+                    </p>
+                </div>
+
+                <div class="mt-6 flex justify-center">
+                    <button onclick="nextSlide()"
+                        class="px-6 py-2.5 rounded-full bg-theme-accent text-white text-sm font-bold shadow-md hover:opacity-90 transition flex items-center gap-2">
+                        <span>View Memory Gallery</span>
+                        <span>📸 →</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 3: GALERI KENANGAN POLAROID (10 FOTO)                        -->
+        <!-- ================================================================= -->
+        <section id="slide-2" class="slide-panel hidden w-full max-w-4xl text-center">
+            <div class="theme-card rounded-3xl p-6 sm:p-9 relative">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6">
+                    <div class="text-center sm:text-left">
+                        <span class="inline-block px-3 py-1 rounded-full bg-theme-badge text-theme-accent text-xs font-bold uppercase tracking-[0.2em] mb-1.5">
+                            Slide 3 • Memory Gallery
+                        </span>
+                        <h2 class="font-theme-serif text-2xl sm:text-3xl font-bold text-theme-primary">
+                            Sweet Moments Together 📸
+                        </h2>
+                    </div>
+
+                    <!-- Tombol Unggah Banyak Foto Sekaligus -->
+                    <label class="cursor-pointer px-4 py-2.5 rounded-full bg-theme-accent hover:opacity-90 text-white text-xs sm:text-sm font-bold shadow-md transition flex items-center gap-2 active:scale-95">
+                        <span>➕</span>
+                        <span>Add Our Photos</span>
+                        <input type="file" id="gallery-file-input" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)">
+                    </label>
+                </div>
+
+                <p class="text-xs sm:text-sm text-theme-secondary mb-5">
+                    Click any photo to enlarge, type directly below a photo to edit its caption, or upload your favorite snapshots together!
+                </p>
+
+                <!-- Grid Foto Polaroid -->
+                <div id="polaroid-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 max-h-[52vh] overflow-y-auto p-2 custom-scroll">
+                    <!-- Dirender lewat JavaScript -->
+                </div>
+
+                <div class="mt-6 flex justify-center">
+                    <button onclick="nextSlide()"
+                        class="px-6 py-2.5 rounded-full bg-theme-accent text-white text-sm font-bold shadow-md hover:opacity-90 transition flex items-center gap-2">
+                        <span>View Moments & Milestones</span>
+                        <span>⏳ →</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 4: MOMEN & MILESTONE SPESIAL                                -->
+        <!-- ================================================================= -->
+        <section id="slide-3" class="slide-panel hidden w-full max-w-3xl text-center">
+            <div class="theme-card rounded-3xl p-6 sm:p-10 relative">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-theme-badge text-theme-accent text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    Slide 4 • Footsteps & Achievements
+                </span>
+                <h2 class="font-theme-serif text-2xl sm:text-3xl md:text-4xl font-bold text-theme-primary mb-2">
+                    Special Moments & Milestones ⏳
+                </h2>
+                <p class="text-xs sm:text-sm text-theme-secondary mb-6">
+                    A look back at the meaningful steps that make your journey so inspiring!
+                </p>
+
+                <!-- Daftar Timeline Milestone -->
+                <div id="milestones-container" class="relative max-w-2xl mx-auto text-left space-y-4 max-h-[48vh] overflow-y-auto pr-1 custom-scroll">
+                    <!-- Dirender lewat JavaScript -->
+                </div>
+
+                <div class="mt-7 flex justify-center">
+                    <button onclick="nextSlide()"
+                        class="px-6 py-2.5 rounded-full bg-theme-accent text-white text-sm font-bold shadow-md hover:opacity-90 transition flex items-center gap-2">
+                        <span>Open 3 Wish Cards</span>
+                        <span>💫 →</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 5: HARAPAN, DOA & HAL SPESIAL (3 KARTU INTERAKTIF)          -->
+        <!-- ================================================================= -->
+        <section id="slide-4" class="slide-panel hidden w-full max-w-3xl text-center">
+            <div class="theme-card rounded-3xl p-6 sm:p-10 relative">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-theme-badge text-theme-accent text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    Slide 5 • Wishes & Appreciation
+                </span>
+                <h2 class="font-theme-serif text-2xl sm:text-3xl md:text-4xl font-bold text-theme-primary mb-2">
+                    3 Wishes & Why You're Special 💫
+                </h2>
+                <p class="text-xs sm:text-sm text-theme-secondary mb-7">
+                    Tap each card below to reveal a heartfelt birthday wish & note of appreciation!
+                </p>
+
+                <!-- 3 Kartu Interaktif -->
+                <div id="wishes-container" class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 text-left">
+                    <!-- Dirender lewat JavaScript -->
+                </div>
+
+                <div class="mt-8 flex justify-center">
+                    <button onclick="nextSlide()"
+                        class="px-6 py-2.5 rounded-full bg-theme-accent text-white text-sm font-bold shadow-md hover:opacity-90 transition flex items-center gap-2">
+                        <span>Open Time Capsule & Surprise</span>
+                        <span>🚀 →</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 6: KAPSUL WAKTU & MENU LINK KEJUTAN                          -->
+        <!-- ================================================================= -->
+        <section id="slide-5" class="slide-panel hidden w-full max-w-2xl text-center">
+            <div class="theme-card rounded-3xl p-6 sm:p-10 md:p-11 relative overflow-hidden">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-theme-badge text-theme-accent text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    Slide 6 • Time Capsule & Surprise
+                </span>
+                <h2 id="display-capsule-title" class="font-theme-serif text-2xl sm:text-3xl md:text-4xl font-bold text-theme-primary mb-3">
+                    To Your Future Self 💌
+                </h2>
+
+                <div class="bg-theme-badge border border-theme-accent/25 rounded-2xl p-5 sm:p-6 mb-6 text-left sm:text-center">
+                    <p id="display-capsule-message" class="text-sm sm:text-base text-theme-primary leading-relaxed whitespace-pre-line">
+                        Whenever you read this note again in the future, remember how many amazing things you have already overcome to get here. Never doubt your own strength.
+
+                        I've also prepared another little surprise waiting for you behind the button below!
+                    </p>
+                </div>
+
+                <!-- Menu / Tombol Akses Link Kustom -->
+                <div class="flex flex-col items-center gap-3">
+                    <button id="slide6-link-btn" onclick="openCustomLink()"
+                        class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-theme-accent text-white font-bold text-base shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5">
+                        <span class="text-xl">🎁</span>
+                        <span id="slide6-link-label">Open Special Surprise Link</span>
+                        <span>↗</span>
+                    </button>
+                    <p id="slide6-link-hint" class="text-xs text-theme-secondary">
+                        https://367and143.blogspot.com/2026/11/301126.html
+                    </p>
+                </div>
+
+                <div class="mt-7 pt-5 border-t border-black/10 flex justify-center">
+                    <button onclick="nextSlide()"
+                        class="px-5 py-2 rounded-full bg-white/80 hover:bg-white text-theme-primary border border-black/10 text-xs sm:text-sm font-bold shadow-xs transition flex items-center gap-2">
+                        <span>Continue to Birthday Cake</span>
+                        <span>🎂 →</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 7: TIUP LILIN & PENUTUP                                     -->
+        <!-- ================================================================= -->
+        <section id="slide-6" class="slide-panel hidden w-full max-w-2xl text-center">
+            <div class="theme-card rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-theme-badge text-theme-accent text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    Slide 7 • Make a Wish & Finale
+                </span>
+                <h2 class="font-theme-serif text-2xl sm:text-3xl font-bold text-theme-primary mb-2">
+                    Time to Make a Wish 🎂
+                </h2>
+
+                <!-- Area Kue Ulang Tahun Interaktif -->
+                <div class="my-6 py-6 px-4 rounded-2xl bg-theme-badge border border-theme-accent/25 relative">
+                    <p id="candle-instruction" class="text-xs sm:text-sm font-semibold text-theme-accent mb-4 animate-pulse">
+                        ✨ Close your eyes for a moment, make a wish, and <strong>click the candle flame</strong> to blow it out! ✨
+                    </p>
+
+                    <!-- Visual Kue Ulang Tahun -->
+                    <div class="relative w-48 sm:w-56 mx-auto pt-10 pb-2 select-none">
+                        <div id="candle-container" onclick="blowOutCandle()" role="button" tabindex="0" title="Click to blow out the candle"
+                            class="relative w-12 mx-auto cursor-pointer group flex flex-col items-center z-20 p-2 -mt-6">
+                            <!-- Api Lilin -->
+                            <div id="candle-flame" class="w-5 h-8 bg-gradient-to-t from-orange-500 via-amber-400 to-yellow-100 rounded-full candle-flame transition-all duration-300 relative">
+                                <div class="w-2 h-4 bg-white/90 rounded-full mx-auto mt-3"></div>
+                            </div>
+                            <!-- Wadah Asap -->
+                            <div id="smoke-container" class="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none"></div>
+                            <!-- Sumbu -->
+                            <div class="w-1 h-2.5 bg-gray-800 rounded-t-sm"></div>
+                            <!-- Batang Lilin -->
+                            <div class="w-4 h-14 bg-gradient-to-r from-rose-200 via-white to-rose-200 rounded-md shadow-sm border border-rose-300/60 overflow-hidden flex flex-col justify-around">
+                                <div class="w-full h-1.5 bg-rose-500/70 -rotate-12"></div>
+                                <div class="w-full h-1.5 bg-rose-500/70 -rotate-12"></div>
+                                <div class="w-full h-1.5 bg-rose-500/70 -rotate-12"></div>
+                            </div>
+                        </div>
+
+                        <!-- Lapisan Atas Kue -->
+                        <div class="w-36 sm:w-40 h-12 mx-auto bg-gradient-to-b from-sky-100 to-sky-200 rounded-t-2xl relative shadow-sm border-b-4 border-white z-10">
+                            <div class="absolute -bottom-2.5 left-0 right-0 flex justify-around px-1">
+                                <div class="w-5 h-4 bg-white rounded-full"></div>
+                                <div class="w-6 h-5 bg-white rounded-full"></div>
+                                <div class="w-5 h-3.5 bg-white rounded-full"></div>
+                                <div class="w-6 h-5 bg-white rounded-full"></div>
+                                <div class="w-5 h-4 bg-white rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <!-- Lapisan Bawah Kue -->
+                        <div class="w-44 sm:w-48 h-16 mx-auto bg-gradient-to-r from-sky-700 via-sky-600 to-sky-700 rounded-t-xl rounded-b-lg shadow-md relative flex items-center justify-center">
+                            <div class="w-full h-3 bg-amber-300/95"></div>
+                        </div>
+
+                        <!-- Piring Kue -->
+                        <div class="w-52 sm:w-60 h-3.5 mx-auto bg-gradient-to-r from-gray-200 via-white to-gray-200 rounded-full shadow-md border border-gray-300/60"></div>
+                    </div>
+
+                    <button id="relight-btn" onclick="relightCandle()"
+                        class="hidden mt-3 mx-auto px-4 py-1.5 rounded-full bg-white text-xs font-bold text-gray-800 shadow-sm border border-black/10 hover:scale-105 transition">
+                        🔥 Relight Candle
+                    </button>
+                </div>
+
+                <!-- Penutup & Nama Pengirim -->
+                <div class="mt-6">
+                    <p class="text-xs uppercase tracking-widest text-theme-secondary mb-1">
+                        Once again, happy birthday! With warmest wishes & love,
+                    </p>
+                    <p id="display-sender" class="font-theme-serif italic text-xl sm:text-2xl font-bold text-theme-accent mb-5">
+                        From Someone Who Always Roots For You ❤️
+                    </p>
+
+                    <button onclick="goToSlide(0)"
+                        class="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-theme-badge hover:opacity-80 text-theme-accent text-xs font-bold border border-theme-accent/30 transition">
+                        <span>🔄</span>
+                        <span>Replay From First Slide</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- NAVIGASI BAWAH: TOMBOL KEMBALI, INDIKATOR 7 TITIK SLIDE, & LANJUT     -->
+    <!-- ===================================================================== -->
+    <nav aria-label="Slide Navigation" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-lg">
+        <div class="bg-sky-50/95 backdrop-blur-md border-2 border-sky-900 shadow-[5px_5px_0px_#0C4A6E] rounded-full px-3 py-2 flex items-center justify-between gap-2">
+            <!-- Tombol Kembali -->
+            <button id="prev-slide-btn" onclick="prevSlide()"
+                class="px-3 py-2 rounded-full text-xs sm:text-sm font-bold text-sky-950 hover:bg-sky-100 disabled:opacity-35 disabled:pointer-events-none transition flex items-center gap-1">
+                <span>←</span>
+                <span>Back</span>
+            </button>
+
+            <!-- 7 Indikator Titik Slide -->
+            <div id="slide-dots" class="flex items-center gap-1.5 sm:gap-2">
+                <button onclick="goToSlide(0)" aria-label="Slide 1: Opening Gift" class="slide-dot w-6 h-2.5 rounded-full bg-sky-600 transition-all"></button>
+                <button onclick="goToSlide(1)" aria-label="Slide 2: Birthday Letter" class="slide-dot w-2.5 h-2.5 rounded-full bg-sky-200 hover:bg-sky-300 transition-all"></button>
+                <button onclick="goToSlide(2)" aria-label="Slide 3: Photo Gallery" class="slide-dot w-2.5 h-2.5 rounded-full bg-sky-200 hover:bg-sky-300 transition-all"></button>
+                <button onclick="goToSlide(3)" aria-label="Slide 4: Moments & Milestones" class="slide-dot w-2.5 h-2.5 rounded-full bg-sky-200 hover:bg-sky-300 transition-all"></button>
+                <button onclick="goToSlide(4)" aria-label="Slide 5: Wish Cards" class="slide-dot w-2.5 h-2.5 rounded-full bg-sky-200 hover:bg-sky-300 transition-all"></button>
+                <button onclick="goToSlide(5)" aria-label="Slide 6: Time Capsule & Link" class="slide-dot w-2.5 h-2.5 rounded-full bg-sky-200 hover:bg-sky-300 transition-all"></button>
+                <button onclick="goToSlide(6)" aria-label="Slide 7: Cake & Finale" class="slide-dot w-2.5 h-2.5 rounded-full bg-sky-200 hover:bg-sky-300 transition-all"></button>
+            </div>
+
+            <!-- Tombol Lanjut -->
+            <button id="next-slide-btn" onclick="nextSlide()"
+                class="px-3 py-2 rounded-full text-xs sm:text-sm font-bold bg-theme-accent text-white hover:opacity-90 disabled:opacity-35 disabled:pointer-events-none transition flex items-center gap-1">
+                <span>Next</span>
+                <span>→</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Elemen Audio HTML5 untuk Lagu MP3 (Autoplay + Loop) -->
+    <audio id="custom-audio-player" src="Coming Up Roses - Best Part.mp3" preload="auto" autoplay loop></audio>
+
+    <!-- Modal Lightbox Foto Galeri -->
+    <div id="lightbox-modal" onclick="closeLightbox()" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 cursor-zoom-out">
+        <div onclick="event.stopPropagation()" class="relative max-w-2xl w-full bg-white rounded-3xl p-3 sm:p-4 border-2 border-sky-900 shadow-[8px_8px_0px_#0C4A6E] cursor-default">
+            <button type="button" onclick="closeLightbox()" class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-red-600 text-white font-bold shadow flex items-center justify-center">
+                ✕
+            </button>
+            <img id="lightbox-img" src="" alt="Enlarged Photo" class="w-full max-h-[70vh] object-contain rounded-2xl bg-sky-50">
+            <p id="lightbox-caption" class="mt-3 text-center font-theme-serif text-base sm:text-lg font-bold text-sky-950"></p>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL "CUSTOMIZE" (TERSTRUKTUR DENGAN TAB KUSTOMISASI)                -->
+    <!-- ===================================================================== -->
+    <div id="customize-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white text-gray-800 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-[8px_8px_0px_#0C4A6E] border-2 border-sky-900 overflow-hidden">
+            <!-- Header Modal -->
+            <div class="px-6 py-4 border-b border-sky-100 flex items-center justify-between bg-sky-50">
+                <div>
+                    <h3 class="font-serif text-xl font-bold text-sky-950">Customize Wishes, Song & Link</h3>
+                    <p class="text-xs text-sky-700">Edit the 7 slides, gallery photos, custom song, and surprise link</p>
+                </div>
+                <button onclick="closeCustomizeModal()" class="w-8 h-8 rounded-full bg-sky-200 hover:bg-sky-300 flex items-center justify-center text-sky-950 font-bold">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Navigasi Tab Modal -->
+            <div class="px-4 py-2.5 bg-sky-50/70 border-b border-sky-200 flex items-center gap-1.5 overflow-x-auto">
+                <button type="button" onclick="switchModalTab('tab-general')" data-modal-tab-btn="tab-general"
+                    class="modal-tab-btn px-3 py-1.5 rounded-full text-xs font-bold bg-sky-600 text-white whitespace-nowrap transition">
+                    📝 Letter & Finale
+                </button>
+                <button type="button" onclick="switchModalTab('tab-moments')" data-modal-tab-btn="tab-moments"
+                    class="modal-tab-btn px-3 py-1.5 rounded-full text-xs font-bold bg-sky-100 text-sky-900 hover:bg-sky-200 whitespace-nowrap transition">
+                    ⏳ Milestones & Wishes
+                </button>
+                <button type="button" onclick="switchModalTab('tab-gallery')" data-modal-tab-btn="tab-gallery"
+                    class="modal-tab-btn px-3 py-1.5 rounded-full text-xs font-bold bg-sky-100 text-sky-900 hover:bg-sky-200 whitespace-nowrap transition">
+                    📸 Photo Gallery
+                </button>
+                <button type="button" onclick="switchModalTab('tab-audio-link')" data-modal-tab-btn="tab-audio-link"
+                    class="modal-tab-btn px-3 py-1.5 rounded-full text-xs font-bold bg-sky-100 text-sky-900 hover:bg-sky-200 whitespace-nowrap transition">
+                    🎵 Custom Song & Link
+                </button>
+            </div>
+
+            <!-- Isi Form (Scrollable) -->
+            <form id="customize-form" onsubmit="saveCustomizations(event)" class="p-6 overflow-y-auto space-y-5 text-left custom-scroll flex-1">
+
+                <!-- TAB 1: SURAT UTAMA & PENUTUP -->
+                <div id="tab-general" class="modal-tab-panel space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="input-recipient" class="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1">Recipient Name (Slide 1 & 2)</label>
+                            <input type="text" id="input-recipient" required class="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-sky-500 outline-none text-sm">
+                        </div>
+                        <div>
+                            <label for="input-subtitle" class="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1">Age / Special Milestone (Slide 2)</label>
+                            <input type="text" id="input-subtitle" required class="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-sky-500 outline-none text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="input-message" class="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1">Main Birthday Message (Slide 2)</label>
+                        <textarea id="input-message" rows="4" required class="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-sky-500 outline-none text-sm resize-y"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="input-sender" class="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1">Sender Name (Slide 7)</label>
+                        <input type="text" id="input-sender" required class="w-full px-3.5 py-2 rounded-xl border border-gray-300 focus:border-sky-500 outline-none text-sm">
+                    </div>
+                </div>
+
+                <!-- TAB 2: MILESTONE (SLIDE 4) & 3 KARTU HARAPAN (SLIDE 5) -->
+                <div id="tab-moments" class="modal-tab-panel hidden space-y-5">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">Special Moments & Milestones (Slide 4)</label>
+                        <div id="modal-milestones-inputs" class="space-y-2.5 bg-gray-50 p-3.5 rounded-2xl border border-gray-200">
+                            <!-- Diisi via JavaScript -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">3 Wish & Appreciation Cards (Slide 5)</label>
+                        <div class="space-y-2.5 bg-gray-50 p-3.5 rounded-2xl border border-gray-200">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <input type="text" id="wish-title-0" placeholder="Card 1 Title" class="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-bold">
+                                <input type="text" id="wish-text-0" placeholder="Wish 1 Message" class="sm:col-span-2 px-3 py-1.5 rounded-lg border border-gray-300 text-xs">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <input type="text" id="wish-title-1" placeholder="Card 2 Title" class="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-bold">
+                                <input type="text" id="wish-text-1" placeholder="Wish 2 Message" class="sm:col-span-2 px-3 py-1.5 rounded-lg border border-gray-300 text-xs">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <input type="text" id="wish-title-2" placeholder="Card 3 Title" class="px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-bold">
+                                <input type="text" id="wish-text-2" placeholder="Wish 3 Message" class="sm:col-span-2 px-3 py-1.5 rounded-lg border border-gray-300 text-xs">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: GALERI FOTO POLAROID (SLIDE 3) -->
+                <div id="tab-gallery" class="modal-tab-panel hidden space-y-3">
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-600">Manage Memory Gallery Photos (Slide 3)</label>
+                        <label class="cursor-pointer px-3.5 py-1.5 rounded-full bg-sky-600 text-white text-xs font-bold hover:bg-sky-700 transition">
+                            ➕ Upload New Photos
+                            <input type="file" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event, true)">
+                        </label>
+                    </div>
+                    <p class="text-xs text-gray-500">You can also type photo captions directly below each Polaroid frame on Slide 3.</p>
+                    <div id="modal-photo-list" class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-60 overflow-y-auto p-2.5 bg-gray-50 rounded-2xl border border-gray-200">
+                        <!-- Daftar thumbnail foto di modal -->
+                    </div>
+                </div>
+
+                <!-- TAB 4: PEMUTAR LAGU SENDIRI & MENU LINK KEJUTAN (SLIDE 6) -->
+                <div id="tab-audio-link" class="modal-tab-panel hidden space-y-5">
+                    <!-- Pengaturan Lagu Sendiri -->
+                    <div class="bg-sky-50/70 p-4 rounded-2xl border border-sky-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-sky-950">🎵 Background Music Settings</h4>
+                            <span id="audio-status-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                                Active Song: Coming Up Roses - Best Part
+                            </span>
+                        </div>
+
+                        <div>
+                            <label class="cursor-pointer flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border-2 border-dashed border-sky-400 bg-white hover:bg-sky-50 text-xs font-bold text-sky-800 transition">
+                                <span>📁 Choose / Replace Audio File (MP3/WAV/OGG)</span>
+                                <input type="file" id="input-audio-file" accept="audio/*" class="hidden" onchange="handleCustomAudioUpload(event)">
+                            </label>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <div>
+                                <label for="input-audio-title" class="block text-[11px] font-bold text-gray-600 mb-1">Displayed Song Title</label>
+                                <input type="text" id="input-audio-title" placeholder="e.g., Coming Up Roses - Best Part" class="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-xs">
+                            </div>
+                            <div>
+                                <label for="input-audio-url" class="block text-[11px] font-bold text-gray-600 mb-1">Or File Name / Direct Audio URL (.mp3)</label>
+                                <input type="text" id="input-audio-url" placeholder="Coming Up Roses - Best Part.mp3" class="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-xs">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pengaturan Menu Link Kejutan & Kapsul Waktu (Slide 6) -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-800">🔗 Time Capsule & Surprise Link Settings (Slide 6)</h4>
+
+                        <div>
+                            <label for="input-capsule-title" class="block text-[11px] font-bold text-gray-600 mb-1">Slide 6 Title</label>
+                            <input type="text" id="input-capsule-title" class="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-bold">
+                        </div>
+
+                        <div>
+                            <label for="input-capsule-message" class="block text-[11px] font-bold text-gray-600 mb-1">Time Capsule Message (Slide 6)</label>
+                            <textarea id="input-capsule-message" rows="3" class="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-xs"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label for="input-link-label" class="block text-[11px] font-bold text-gray-600 mb-1">Link Button Text</label>
+                                <input type="text" id="input-link-label" placeholder="e.g., Open Video / Playlist" class="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-xs font-bold">
+                            </div>
+                            <div>
+                                <label for="input-link-url" class="block text-[11px] font-bold text-gray-600 mb-1">Destination URL When Clicked</label>
+                                <input type="text" id="input-link-url" placeholder="e.g., https://open.spotify.com/..." class="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-xs">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Footer Tombol Simpan Modal -->
+            <div class="px-6 py-3.5 border-t border-sky-100 bg-sky-50 flex items-center justify-end gap-2.5">
+                <button type="button" onclick="closeCustomizeModal()" class="px-4 py-2 rounded-full bg-white hover:bg-gray-100 text-gray-700 border border-gray-300 text-xs font-bold transition">
+                    Cancel
+                </button>
+                <button type="submit" form="customize-form" class="px-5 py-2 rounded-full bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md transition">
+                    💾 Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* -------------------------------------------------------------------
+           1. STATE UTAMA APLIKASI (7 SLIDE, TEMA RETRO SKY, 10 FOTO, LAGU, LINK)
+           ------------------------------------------------------------------- */
+        let currentSlide = 0;
+        const totalSlides = 7;
+        let currentTheme = 'retro';
+
+        let customAudioConfig = {
+            mode: 'custom',
+            src: 'Coming Up Roses - Best Part.mp3',
+            title: 'Coming Up Roses - Best Part'
+        };
+
+        let customLinkConfig = {
+            label: 'Open Special Surprise Link',
+            url: 'https://367and143.blogspot.com/2026/11/301126.html'
+        };
+
+        // Galeri Foto Polaroid Bawaan (Slide 3 - 10 Foto)
+        let galleryPhotos = [
+            {
+                id: 'photo-1',
+                src: 'foto1.jpeg',
+                caption: 'A fun moment that always brings a smile'
+            },
+            {
+                id: 'photo-2',
+                src: 'foto2.jpeg',
+                caption: 'Laughing freely without a care together'
+            },
+            {
+                id: 'photo-3',
+                src: 'foto3.jpeg',
+                caption: 'Small steps toward big dreams'
+            },
+            {
+                id: 'photo-4',
+                src: 'foto4.jpeg',
+                caption: 'Chasing sunny skies and spontaneous adventures'
+            },
+            {
+                id: 'photo-5',
+                src: 'foto5.jpeg',
+                caption: 'That "Pecel Ayam" date'
+            },
+            {
+                id: 'photo-6',
+                src: 'foto6.jpeg',
+                caption: 'Sweet treats and even sweeter company'
+            },
+            {
+                id: 'photo-7',
+                src: 'foto7.jpeg',
+                caption: 'Every detour turned into the best memory'
+            },
+            {
+                id: 'photo-8',
+                src: 'foto8.jpeg',
+                caption: 'Always cheering each other on through everything'
+            },
+            {
+                id: 'photo-9',
+                src: 'foto9.jpeg',
+                caption: 'Here’s to a hundred more snapshots like these'
+            }
+        ];
+
+        let milestones = [
+            {
+                badge: 'Chapter 1 • The Beginning',
+                title: 'The First Time We Met',
+                desc: 'A simple moment that turned into the start of countless fun stories and unforgettable laughs.'
+            },
+            {
+                badge: 'Chapter 2 • Growing & Striving',
+                title: 'Overcoming Challenges',
+                desc: 'So proud to see how strong, patient, and determined you are in chasing every good thing in life.'
+            },
+            {
+                badge: 'Chapter 3 • Today',
+                title: 'Celebrating Your New Year 🎉',
+                desc: 'One year wiser, shining brighter than ever, and ready for wonderful new adventures ahead!'
+            }
+        ];
+
+        let wishCards = [
+            {
+                icon: '🌟',
+                title: 'Health & Happiness',
+                text: 'May you always be blessed with great health, a peaceful heart, and happiness flowing every single day.',
+                revealed: true
+            },
+            {
+                icon: '🚀',
+                title: 'Dreams Coming True',
+                text: 'May every good plan, career goal, and dream you are working toward find smooth paths this year.',
+                revealed: false
+            },
+            {
+                icon: '💖',
+                title: 'Thank You For Being You',
+                text: 'Thank you for being such a genuine, warm soul who always brings positive energy whenever we meet.',
+                revealed: false
+            }
+        ];
+
+        /* -------------------------------------------------------------------
+           2. NAVIGASI 7 SLIDE (TOMBOL, INDIKATOR TITIK, KEYBOARD, & SWIPE)
+           ------------------------------------------------------------------- */
+        function goToSlide(index) {
+            if (index < 0 || index >= totalSlides) return;
+            currentSlide = index;
+
+            document.querySelectorAll('.slide-panel').forEach((panel, idx) => {
+                if (idx === currentSlide) {
+                    panel.classList.remove('hidden');
+                    panel.classList.remove('slide-active');
+                    void panel.offsetWidth;
+                    panel.classList.add('slide-active');
+                } else {
+                    panel.classList.add('hidden');
+                }
+            });
+
+            document.querySelectorAll('.slide-dot').forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.classList.remove('w-2.5', 'bg-sky-200');
+                    dot.classList.add('w-6', 'bg-theme-accent');
+                } else {
+                    dot.classList.remove('w-6', 'bg-theme-accent');
+                    dot.classList.add('w-2.5', 'bg-sky-200');
+                }
+            });
+
+            document.getElementById('prev-slide-btn').disabled = currentSlide === 0;
+            document.getElementById('next-slide-btn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const activeTag = document.activeElement?.tagName;
+            if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            const diffX = e.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(diffX) > 65) {
+                if (diffX < 0) nextSlide();
+                else prevSlide();
+            }
+        }, { passive: true });
+
+        /* -------------------------------------------------------------------
+           3. PENGATURAN TEMA RETRO BIRU SKY
+           ------------------------------------------------------------------- */
+        function setTheme(themeName = 'retro') {
+            currentTheme = 'retro';
+            document.body.setAttribute('data-theme', 'retro');
+        }
+
+        /* -------------------------------------------------------------------
+           4. SLIDE 3: GALERI FOTO POLAROID & UNGGAH BANYAK FOTO
+           ------------------------------------------------------------------- */
+        function renderGallery() {
+            const grid = document.getElementById('polaroid-grid');
+            grid.innerHTML = '';
+
+            if (galleryPhotos.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-10 text-center text-theme-secondary text-sm">
+                        No photos in the gallery yet. Click <strong>"Add Our Photos"</strong> above to upload!
+                    </div>
+                `;
+                return;
+            }
+
+            const rotations = ['-rotate-1', 'rotate-1', '-rotate-2', 'rotate-2'];
+            galleryPhotos.forEach((photo, idx) => {
+                const rot = rotations[idx % rotations.length];
+                const card = document.createElement('div');
+                card.className = `polaroid-frame rounded-2xl p-3 pb-4 shadow-md relative group ${rot}`;
+                card.innerHTML = `
+                    <button type="button" onclick="deletePhoto('${photo.id}')" title="Delete Photo"
+                        class="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-red-600 text-white text-xs font-bold shadow flex items-center justify-center">
+                        ✕
+                    </button>
+                    <div onclick="openLightbox('${photo.id}')" class="cursor-zoom-in overflow-hidden rounded-xl aspect-[4/3] bg-black/5">
+                        <img src="${photo.src}" alt="${escapeHtml(photo.caption)}"
+                            onerror="this.src='https://placehold.co/600x450/E0F2FE/0284C7?text=Memory+Photo'"
+                            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                    </div>
+                    <input type="text" value="${escapeHtml(photo.caption)}"
+                        onchange="updatePhotoCaption('${photo.id}', this.value)"
+                        aria-label="Photo caption"
+                        class="mt-3 w-full bg-transparent text-center font-theme-serif text-sm font-semibold text-theme-primary focus:outline-none focus:bg-black/5 rounded-lg px-2 py-1">
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function handlePhotoUpload(event, refreshModal = false) {
+            const files = Array.from(event.target.files || []);
+            if (files.length === 0) return;
+
+            files.forEach((file, index) => {
+                const objectUrl = URL.createObjectURL(file);
+                const baseName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+                galleryPhotos.push({
+                    id: 'photo-' + Date.now() + '-' + index,
+                    src: objectUrl,
+                    caption: baseName || 'Wonderful Memory Together ✨'
+                });
+            });
+
+            renderGallery();
+            if (refreshModal) renderModalPhotoList();
+            event.target.value = '';
+        }
+
+        function updatePhotoCaption(id, newCaption) {
+            const target = galleryPhotos.find(p => p.id === id);
+            if (target) {
+                target.caption = newCaption;
+            }
+        }
+
+        function deletePhoto(id, refreshModal = false) {
+            galleryPhotos = galleryPhotos.filter(p => p.id !== id);
+            renderGallery();
+            if (refreshModal) renderModalPhotoList();
+        }
+
+        function openLightbox(id) {
+            const photo = galleryPhotos.find(p => p.id === id);
+            if (!photo) return;
+            document.getElementById('lightbox-img').src = photo.src;
+            document.getElementById('lightbox-caption').innerText = photo.caption;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        /* -------------------------------------------------------------------
+           5. SLIDE 4: RENDER MILESTONE & MOMEN SPESIAL
+           ------------------------------------------------------------------- */
+        function renderMilestones() {
+            const container = document.getElementById('milestones-container');
+            container.innerHTML = '';
+
+            milestones.forEach((item, idx) => {
+                const row = document.createElement('div');
+                row.className = 'relative pl-7 pb-2 border-l-2 border-theme-accent/40 last:border-l-transparent';
+                row.innerHTML = `
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-theme-accent ring-4 ring-white/80 shadow-xs"></span>
+                    <div class="rounded-2xl p-4 bg-theme-badge border border-theme-accent/25">
+                        <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-theme-accent mb-1">
+                            ${escapeHtml(item.badge || `Moment #${idx + 1}`)}
+                        </span>
+                        <h3 class="font-theme-serif text-lg font-bold text-theme-primary">
+                            ${escapeHtml(item.title)}
+                        </h3>
+                        <p class="text-xs sm:text-sm text-theme-secondary mt-1 leading-relaxed">
+                            ${escapeHtml(item.desc)}
+                        </p>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        /* -------------------------------------------------------------------
+           6. SLIDE 5: KARTU HARAPAN & HAL SPESIAL INTERAKTIF
+           ------------------------------------------------------------------- */
+        function renderWishCards() {
+            const container = document.getElementById('wishes-container');
+            container.innerHTML = '';
+
+            wishCards.forEach((card, idx) => {
+                const el = document.createElement('div');
+                el.onclick = () => toggleWishCard(idx);
+                el.setAttribute('role', 'button');
+                el.setAttribute('tabindex', '0');
+
+                if (card.revealed) {
+                    el.className = 'wish-card cursor-pointer rounded-2xl p-5 bg-theme-badge border border-theme-accent/35 shadow-sm flex flex-col justify-between min-h-[190px]';
+                    el.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-2xl">${card.icon}</span>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-theme-accent">Card #${idx + 1}</span>
+                            </div>
+                            <h3 class="font-theme-serif text-lg font-bold text-theme-primary mb-2">${escapeHtml(card.title)}</h3>
+                            <p class="text-xs sm:text-sm text-theme-secondary leading-relaxed">${escapeHtml(card.text)}</p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-theme-accent/80">Tap to close card</span>
+                    `;
+                } else {
+                    el.className = 'wish-card cursor-pointer rounded-2xl p-5 bg-theme-accent text-white shadow-md flex flex-col items-center justify-center text-center min-h-[190px]';
+                    el.innerHTML = `
+                        <span class="text-3xl mb-2">💌</span>
+                        <p class="font-theme-serif text-lg font-bold">Special Wish #${idx + 1}</p>
+                        <p class="text-xs opacity-90 mt-1">Tap to reveal message</p>
+                    `;
+                }
+
+                container.appendChild(el);
+            });
+        }
+
+        function toggleWishCard(idx) {
+            wishCards[idx].revealed = !wishCards[idx].revealed;
+            renderWishCards();
+            if (wishCards[idx].revealed) {
+                launchConfetti(35, window.innerWidth / 2, window.innerHeight / 2, true);
+            }
+        }
+
+        /* -------------------------------------------------------------------
+           7. SLIDE 6: MENU LINK KEJUTAN KUSTOM
+           ------------------------------------------------------------------- */
+        function normalizeUrl(rawUrl) {
+            const trimmed = (rawUrl || '').trim();
+            if (!trimmed) return 'https://open.spotify.com';
+            if (/^https?:\/\//i.test(trimmed)) return trimmed;
+            return 'https://' + trimmed;
+        }
+
+        function updateCustomLinkUI() {
+            const safeLabel = customLinkConfig.label || 'Open Special Surprise Link';
+            document.getElementById('slide6-link-label').innerText = safeLabel;
+            document.getElementById('slide6-link-hint').innerText = `Destination link: ${customLinkConfig.url}`;
+        }
+
+        function openCustomLink() {
+            const targetUrl = normalizeUrl(customLinkConfig.url);
+            launchConfetti(45, window.innerWidth / 2, window.innerHeight / 3, true);
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        /* -------------------------------------------------------------------
+           8. SLIDE 7: KUE ULANG TAHUN & LILIN TIUP INTERAKTIF
+           ------------------------------------------------------------------- */
+        let isCandleLit = true;
+
+        function blowOutCandle() {
+            if (!isCandleLit) return;
+            isCandleLit = false;
+
+            const flame = document.getElementById('candle-flame');
+            const smokeContainer = document.getElementById('smoke-container');
+            const instruction = document.getElementById('candle-instruction');
+            const relightBtn = document.getElementById('relight-btn');
+
+            flame.classList.add('opacity-0', 'scale-0');
+
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => {
+                    const puff = document.createElement('div');
+                    puff.className = 'w-4 h-4 bg-gray-400/65 rounded-full blur-xs smoke-puff absolute';
+                    puff.style.left = `${(Math.random() - 0.5) * 10}px`;
+                    smokeContainer.appendChild(puff);
+                    setTimeout(() => puff.remove(), 2200);
+                }, i * 210);
+            }
+
+            instruction.innerHTML = '🎉 <strong>Yay! You blew out the candle!</strong> May all your wishes & dreams come true! 🎉';
+            instruction.classList.remove('animate-pulse');
+            relightBtn.classList.remove('hidden');
+
+            const rect = flame.getBoundingClientRect();
+            launchConfetti(130, rect.left + rect.width / 2, rect.top, true);
+        }
+
+        function relightCandle() {
+            isCandleLit = true;
+            const flame = document.getElementById('candle-flame');
+            const instruction = document.getElementById('candle-instruction');
+            const relightBtn = document.getElementById('relight-btn');
+
+            flame.classList.remove('opacity-0', 'scale-0');
+            instruction.innerHTML = '✨ Close your eyes for a moment, make a wish, and <strong>click the candle flame</strong> to blow it out! ✨';
+            instruction.classList.add('animate-pulse');
+            relightBtn.classList.add('hidden');
+        }
+
+        /* -------------------------------------------------------------------
+           9. MODAL "CUSTOMIZE" (DENGAN TAB & INPUT LENGKAP)
+           ------------------------------------------------------------------- */
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.modal-tab-panel').forEach(panel => {
+                panel.classList.toggle('hidden', panel.id !== tabId);
+            });
+            document.querySelectorAll('.modal-tab-btn').forEach(btn => {
+                const active = btn.getAttribute('data-modal-tab-btn') === tabId;
+                if (active) {
+                    btn.classList.add('bg-sky-600', 'text-white');
+                    btn.classList.remove('bg-sky-100', 'text-sky-900');
+                } else {
+                    btn.classList.remove('bg-sky-600', 'text-white');
+                    btn.classList.add('bg-sky-100', 'text-sky-900');
+                }
+            });
+        }
+
+        function openCustomizeModal() {
+            document.getElementById('input-recipient').value = document.getElementById('display-recipient').innerText.trim();
+            document.getElementById('input-subtitle').value = document.getElementById('display-subtitle').innerText.trim();
+            document.getElementById('input-message').value = document.getElementById('display-message').innerText.trim();
+            document.getElementById('input-sender').value = document.getElementById('display-sender').innerText.trim();
+
+            const milestoneWrap = document.getElementById('modal-milestones-inputs');
+            milestoneWrap.innerHTML = '';
+            milestones.forEach((m, i) => {
+                const block = document.createElement('div');
+                block.className = 'grid grid-cols-1 sm:grid-cols-3 gap-2';
+                block.innerHTML = `
+                    <input type="text" id="ms-badge-${i}" value="${escapeHtml(m.badge)}" placeholder="Time Label" class="px-2.5 py-1.5 rounded-lg border border-gray-300 text-xs font-semibold">
+                    <input type="text" id="ms-title-${i}" value="${escapeHtml(m.title)}" placeholder="Moment Title" class="px-2.5 py-1.5 rounded-lg border border-gray-300 text-xs font-bold">
+                    <input type="text" id="ms-desc-${i}" value="${escapeHtml(m.desc)}" placeholder="Short Story" class="px-2.5 py-1.5 rounded-lg border border-gray-300 text-xs">
+                `;
+                milestoneWrap.appendChild(block);
+            });
+
+            wishCards.forEach((w, i) => {
+                document.getElementById(`wish-title-${i}`).value = w.title;
+                document.getElementById(`wish-text-${i}`).value = w.text;
+            });
+
+            document.getElementById('input-audio-title').value = customAudioConfig.title;
+            document.getElementById('input-audio-url').value = customAudioConfig.src.startsWith('blob:') ? '' : customAudioConfig.src;
+            updateAudioStatusBadge();
+
+            document.getElementById('input-capsule-title').value = document.getElementById('display-capsule-title').innerText.trim();
+            document.getElementById('input-capsule-message').value = document.getElementById('display-capsule-message').innerText.trim();
+            document.getElementById('input-link-label').value = customLinkConfig.label;
+            document.getElementById('input-link-url').value = customLinkConfig.url;
+
+            renderModalPhotoList();
+            setTheme('retro');
+            switchModalTab('tab-general');
+            document.getElementById('customize-modal').classList.remove('hidden');
+        }
+
+        function closeCustomizeModal() {
+            document.getElementById('customize-modal').classList.add('hidden');
+        }
+
+        function renderModalPhotoList() {
+            const list = document.getElementById('modal-photo-list');
+            list.innerHTML = '';
+            if (galleryPhotos.length === 0) {
+                list.innerHTML = '<p class="col-span-full text-xs text-gray-500 text-center py-3">No photos yet.</p>';
+                return;
+            }
+            galleryPhotos.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'relative rounded-lg overflow-hidden border border-gray-200 bg-white aspect-[4/3] group';
+                item.innerHTML = `
+                    <img src="${p.src}" alt="" class="w-full h-full object-cover">
+                    <button type="button" onclick="deletePhoto('${p.id}', true)"
+                        class="absolute top-1 right-1 w-6 h-6 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center shadow">
+                        ✕
+                    </button>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function saveCustomizations(event) {
+            event.preventDefault();
+            const recipient = document.getElementById('input-recipient').value.trim();
+            const subtitle = document.getElementById('input-subtitle').value.trim();
+            const message = document.getElementById('input-message').value.trim();
+            const sender = document.getElementById('input-sender').value.trim();
+
+            if (recipient) {
+                document.getElementById('display-recipient').innerText = recipient;
+                document.getElementById('s1-recipient-preview').innerText = 'To: ' + recipient;
+            }
+            if (subtitle) document.getElementById('display-subtitle').innerText = subtitle;
+            if (message) document.getElementById('display-message').innerText = message;
+            if (sender) document.getElementById('display-sender').innerText = sender;
+
+            milestones.forEach((m, i) => {
+                const b = document.getElementById(`ms-badge-${i}`)?.value.trim();
+                const t = document.getElementById(`ms-title-${i}`)?.value.trim();
+                const d = document.getElementById(`ms-desc-${i}`)?.value.trim();
+                if (b) m.badge = b;
+                if (t) m.title = t;
+                if (d) m.desc = d;
+            });
+
+            wishCards.forEach((w, i) => {
+                const wt = document.getElementById(`wish-title-${i}`)?.value.trim();
+                const wx = document.getElementById(`wish-text-${i}`)?.value.trim();
+                if (wt) w.title = wt;
+                if (wx) w.text = wx;
+            });
+
+            const audioTitleInput = document.getElementById('input-audio-title').value.trim();
+            const audioUrlInput = document.getElementById('input-audio-url').value.trim();
+            if (audioUrlInput) {
+                const wasPlaying = isPlayingMusic;
+                stopBirthdayMusic();
+                customAudioConfig.mode = 'custom';
+                customAudioConfig.src = audioUrlInput;
+                customAudioConfig.title = audioTitleInput || 'Coming Up Roses - Best Part';
+                document.getElementById('custom-audio-player').src = customAudioConfig.src;
+                if (wasPlaying) startBirthdayMusic();
+            } else if (audioTitleInput) {
+                customAudioConfig.title = audioTitleInput;
+            }
+            updateAudioStatusBadge();
+            updateMusicButtonUI();
+
+            const capsuleTitle = document.getElementById('input-capsule-title').value.trim();
+            const capsuleMsg = document.getElementById('input-capsule-message').value.trim();
+            const linkLabel = document.getElementById('input-link-label').value.trim();
+            const linkUrl = document.getElementById('input-link-url').value.trim();
+
+            if (capsuleTitle) document.getElementById('display-capsule-title').innerText = capsuleTitle;
+            if (capsuleMsg) document.getElementById('display-capsule-message').innerText = capsuleMsg;
+            if (linkLabel) customLinkConfig.label = linkLabel;
+            if (linkUrl) customLinkConfig.url = normalizeUrl(linkUrl);
+            updateCustomLinkUI();
+
+            renderMilestones();
+            renderWishCards();
+            renderGallery();
+            closeCustomizeModal();
+            launchConfetti(60, window.innerWidth / 2, window.innerHeight / 3, true);
+        }
+
+        /* -------------------------------------------------------------------
+           10. SISTEM KONFETI HTML5 CANVAS (TEMA RETRO BIRU SKY)
+           ------------------------------------------------------------------- */
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let confettiPieces = [];
+        let animationFrameId = null;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function getThemeConfettiColors() {
+            const styles = getComputedStyle(document.body);
+            return [
+                styles.getPropertyValue('--confetti-1').trim() || '#0284C7',
+                styles.getPropertyValue('--confetti-2').trim() || '#38BDF8',
+                styles.getPropertyValue('--confetti-3').trim() || '#F59E0B',
+                styles.getPropertyValue('--confetti-4').trim() || '#0C4A6E'
+            ];
+        }
+
+        class ConfettiParticle {
+            constructor(x, y, isBurst = false) {
+                const palette = getThemeConfettiColors();
+                this.x = x ?? Math.random() * canvas.width;
+                this.y = y ?? -20;
+                this.size = Math.random() * 8 + 5;
+                this.color = palette[Math.floor(Math.random() * palette.length)];
+                this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
+
+                if (isBurst) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const velocity = Math.random() * 10 + 4;
+                    this.vx = Math.cos(angle) * velocity;
+                    this.vy = Math.sin(angle) * velocity - 4;
+                } else {
+                    this.vx = (Math.random() - 0.5) * 3;
+                    this.vy = Math.random() * 3 + 2;
+                }
+
+                this.gravity = 0.14;
+                this.drag = 0.98;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 10;
+                this.opacity = 1;
+            }
+
+            update() {
+                this.vx *= this.drag;
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.rotation += this.rotationSpeed;
+                if (this.y > canvas.height + 20) this.opacity -= 0.05;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.opacity);
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+                if (this.shape === 'rect') {
+                    ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function launchConfetti(amount = 100, originX = null, originY = null, isBurst = false) {
+            for (let i = 0; i < amount; i++) {
+                confettiPieces.push(new ConfettiParticle(originX, originY, isBurst));
+            }
+            if (!animationFrameId) animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confettiPieces.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if (p.opacity <= 0) confettiPieces.splice(index, 1);
+            });
+            if (confettiPieces.length > 0) {
+                animationFrameId = requestAnimationFrame(animateConfetti);
+            } else {
+                animationFrameId = null;
+            }
+        }
+
+        /* -------------------------------------------------------------------
+           11. PEMUTAR MUSIK: FILE MP3 (COMING UP ROSES - BEST PART)
+           ------------------------------------------------------------------- */
+        let isPlayingMusic = false;
+
+        function handleCustomAudioUpload(event) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+
+            const wasPlaying = isPlayingMusic;
+            stopBirthdayMusic();
+
+            const objectUrl = URL.createObjectURL(file);
+            const cleanName = file.name.replace(/\.[^/.]+$/, '');
+
+            customAudioConfig.mode = 'custom';
+            customAudioConfig.src = objectUrl;
+            customAudioConfig.title = cleanName;
+
+            const player = document.getElementById('custom-audio-player');
+            player.src = objectUrl;
+
+            document.getElementById('input-audio-title').value = cleanName;
+            document.getElementById('input-audio-url').value = '';
+            updateAudioStatusBadge();
+            updateMusicButtonUI();
+
+            if (wasPlaying) {
+                startBirthdayMusic();
+            }
+        }
+
+        function updateAudioStatusBadge() {
+            const badge = document.getElementById('audio-status-badge');
+            if (!badge) return;
+            badge.innerText = `Active Song: ${customAudioConfig.title || 'Coming Up Roses - Best Part'}`;
+            badge.className = 'px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold';
+        }
+
+        function updateMusicButtonUI() {
+            const icon = document.getElementById('music-icon');
+            const label = document.getElementById('music-label');
+            if (isPlayingMusic) {
+                icon.innerText = '⏸️';
+                label.innerText = customAudioConfig.title || 'Coming Up Roses - Best Part';
+            } else {
+                icon.innerText = '🎵';
+                label.innerText = `Play: ${customAudioConfig.title || 'Coming Up Roses - Best Part'}`;
+            }
+        }
+
+        function startBirthdayMusic() {
+            const player = document.getElementById('custom-audio-player');
+            if (!player.src && customAudioConfig.src) {
+                player.src = customAudioConfig.src;
+            }
+            player.play().then(() => {
+                isPlayingMusic = true;
+                updateMusicButtonUI();
+                removeAutoplayUnlockListeners();
+            }).catch(() => {
+                isPlayingMusic = false;
+                updateMusicButtonUI();
+            });
+        }
+
+        function stopBirthdayMusic() {
+            isPlayingMusic = false;
+            removeAutoplayUnlockListeners();
+            const player = document.getElementById('custom-audio-player');
+            if (!player.paused) {
+                player.pause();
+            }
+            updateMusicButtonUI();
+        }
+
+        function toggleBirthdayMusic() {
+            isPlayingMusic ? stopBirthdayMusic() : startBirthdayMusic();
+        }
+
+        function handleFirstUserInteraction() {
+            if (!isPlayingMusic) {
+                startBirthdayMusic();
+            }
+        }
+
+        function attachAutoplayUnlockListeners() {
+            ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+                document.addEventListener(evt, handleFirstUserInteraction, { passive: true });
+            });
+        }
+
+        function removeAutoplayUnlockListeners() {
+            ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+                document.removeEventListener(evt, handleFirstUserInteraction);
+            });
+        }
+
+        function openGiftBox() {
+            launchConfetti(110, window.innerWidth / 2, window.innerHeight / 2, true);
+            startBirthdayMusic();
+            goToSlide(1);
+        }
+
+        /* -------------------------------------------------------------------
+           12. UTILITAS KEAMANAN TEKS & INISIALISASI AWAL
+           ------------------------------------------------------------------- */
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTheme('retro');
+            renderGallery();
+            renderMilestones();
+            renderWishCards();
+            updateCustomLinkUI();
+            updateMusicButtonUI();
+            goToSlide(0);
+
+            attachAutoplayUnlockListeners();
+            startBirthdayMusic();
+        });
+    </script>
+</body>
+</html>
